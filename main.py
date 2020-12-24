@@ -18,6 +18,19 @@ for i in range(7):
   image = pygame.image.load(str(i) + ".png")
   images.append(image)
 
+#Loading and processing the word dictionary
+a_file = open("dictionary.txt", "r")
+list_of_lists = []
+for line in a_file:
+  stripped_line = line.strip()
+  line_list = stripped_line. split()
+  line_up = [x.upper() for x in line_list]
+  list_of_lists. append(line_up)
+a_file. close()
+
+wordlist = [''.join(i) for i in list_of_lists]
+#words = str(wordlist)
+
 #colors
 Grey = (125,125,125)
 BLACK = (0,0,0)
@@ -29,8 +42,9 @@ WORD_FONT = pygame.font.SysFont('ariel', 60)
 
 # Game variables
 Hangman_Status=0
-words = ["NAGGER","DEVELOPER","CONSCIENCE","SHALLOW","HANGMAN"]
-word = random.choice(words)
+#words = ['HELLO', 'DARKNESS', 'MY', 'OLD', 'FRIEND']
+#print(words)
+word = random.choice(wordlist)
 guessed = []
 
 FPS = 60

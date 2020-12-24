@@ -1,5 +1,6 @@
 import pygame
 import math
+import random
 
 #set window
 pygame.init()
@@ -28,7 +29,8 @@ WORD_FONT = pygame.font.SysFont('ariel', 60)
 
 # Game variables
 Hangman_Status=0
-word = "DEVELOPER"
+words = ["NAGGER","DEVELOPER","CONSCIENCE","SHALLOW","HANGMAN"]
+word = random.choice(words)
 guessed = []
 
 FPS = 60
@@ -74,6 +76,13 @@ def draw():
 
 
 run = True
+#show message
+def display_text(message):
+  window.fill(WHITE)
+  text = WORD_FONT.render(message,1,BLACK)
+  window.blit(text,(WIDTH/2 - text.get_width()/2 , HEIGHT/2 - text.get_height()/2))
+  pygame.display.update()
+  pygame.time.delay(2000)
 
 while run:
   clock.tick(FPS)
@@ -101,19 +110,11 @@ while run:
       won = False
       break
   if won:
-    window.fill(WHITE)
-    text = WORD_FONT.render("YOU WON",1,BLACK)
-    window.blit(text,(WIDTH/2 - text.get_width()/2 , HEIGHT/2 - text.get_height()/2))
-    pygame.display.update()
-    pygame.time.delay(2000)
+    display_text("YOU WON")
     break
 
   if Hangman_Status == 6:
-    window.fill(WHITE)
-    text = WORD_FONT.render("YOU LOST",1,BLACK)
-    window.blit(text,(WIDTH/2 - text.get_width()/2 , HEIGHT/2 - text.get_height()/2))
-    pygame.display.update()
-    pygame.time.delay(2000)
+    display_text("YOU LOST")
     break
 
 pygame.quit()
